@@ -2,17 +2,23 @@ from src.ChromeConnector import ChromeConnector
 from src.BoardReader import BoardReader
 from src.MinesweeperSolver import MinesweeperSolver
 from src.AutoPlayer import AutoPlayer
+import os
+
+# Create directories for debug outputs
+os.makedirs("screenshots", exist_ok=True)
+os.makedirs("dumps", exist_ok=True)
 
 def main():
     print("=== MINESWEEPER SOLVER (ADVANCED) ===")
-    print("1. Suggest")
-    print("2. Auto mode")
+    print("1. Manual Mode")
+    print("2. Auto Mode")
 
     choice = input("Choose mode (1-2): ").strip()
 
     # Connect to Chrome
     chrome = ChromeConnector()
     if not chrome.find_minesweeper_tab():
+        print("Failed to find or open Minesweeper tab. Make sure Chrome is running with remote debugging enabled.")
         return
     
     try:
